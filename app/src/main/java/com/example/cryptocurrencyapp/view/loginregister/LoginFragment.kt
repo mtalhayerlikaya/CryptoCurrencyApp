@@ -28,11 +28,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btn:Button = view.findViewById(R.id.loginBtn)
+        /*val btn:Button = view.findViewById(R.id.loginBtn)
 
         btn.setOnClickListener {
             startActivity(Intent(activity,MainActivity::class.java))
-        }
+        }*/
     }
 
 
