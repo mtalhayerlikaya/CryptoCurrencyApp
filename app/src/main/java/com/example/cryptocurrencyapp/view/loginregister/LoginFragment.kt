@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.cryptocurrencyapp.MainActivity
 import com.example.cryptocurrencyapp.R
+import com.example.cryptocurrencyapp.databinding.FragmentLoginBinding
 
 
 class LoginFragment : Fragment() {
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +25,9 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,6 +37,7 @@ class LoginFragment : Fragment() {
         btn.setOnClickListener {
             startActivity(Intent(activity,MainActivity::class.java))
         }*/
+
     }
 
 
