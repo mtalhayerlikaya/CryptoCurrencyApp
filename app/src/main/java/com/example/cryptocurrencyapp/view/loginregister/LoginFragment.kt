@@ -8,8 +8,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenCreated
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.databinding.FragmentLoginBinding
+import com.example.cryptocurrencyapp.utils.LoginResult
+
 import com.example.cryptocurrencyapp.view.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -39,31 +46,46 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.signUpLinearLayout.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+            it.findNavController().navigate(action)
+        }
+
         binding.loginBtn.setOnClickListener {
-            authViewModel.loginUser(binding.emailEditText.text.toString(),
-                binding.passwordEditText.text.toString())
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            val result = authViewModel.canUserLogin(email, password)
+            if (result == LoginResult.OK) {
+                authViewModel.loginUser(email, password)
+            } else {
+                Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
+            }
         }
 
         observeFlow()
     }
 
     private fun observeFlow() {
-        authViewModel.loginFlow.value?.let {resource->
-            when (resource) {
-                is Resource.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(),resource.exception.toString(),Toast.LENGTH_LONG).show()
-                }
-                is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-                is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    startActivity(Intent(activity, MainActivity::class.java))
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            authViewModel.loginFlow.collect() { state ->
+                when (state) {
+                    is Resource.Failure -> {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), state.exceptionMessage, Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Resource.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        startActivity(Intent(activity, MainActivity::class.java))
+                    }
                 }
             }
+
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_register_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_theme"
@@ -15,6 +16,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".35" />
+
+    <ProgressBar
+        android:id="@+id/progressBarRegister"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_register_root"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_register_root"
+        app:layout_constraintStart_toEndOf="@+id/fragment_register_root"
+        app:layout_constraintStart_toStartOf="@+id/fragment_register_root"
+        app:layout_constraintTop_toTopOf="@+id/fragment_register_root" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardViewRegister"
@@ -33,7 +46,7 @@
 
 
             <EditText
-                android:id="@+id/emailEditTextRegister2"
+                android:id="@+id/emailEditTextRegister"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
@@ -70,7 +83,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailEditTextRegister2" />
+                app:layout_constraintTop_toBottomOf="@+id/emailEditTextRegister" />
 
             <EditText
                 android:id="@+id/nameEditTextRegister"

@@ -29,8 +29,6 @@
             android:name=".view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.CryptoCurrencyApp.NoActionBar">
-            >
-
         </activity>
 
     </application>
