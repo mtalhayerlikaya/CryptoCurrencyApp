@@ -2,18 +2,24 @@ package com.example.cryptocurrencyapp.view.loginregister
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import com.example.cryptocurrencyapp.MainActivity
-import com.example.cryptocurrencyapp.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.databinding.FragmentLoginBinding
+import com.example.cryptocurrencyapp.view.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
-    private lateinit var binding: FragmentLoginBinding
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+    private val authViewModel by viewModels<AuthViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,19 +31,43 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(layoutInflater)
+        _binding = FragmentLoginBinding.inflate(layoutInflater)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*val btn:Button = view.findViewById(R.id.loginBtn)
 
-        btn.setOnClickListener {
-            startActivity(Intent(activity,MainActivity::class.java))
-        }*/
+        binding.loginBtn.setOnClickListener {
+            authViewModel.loginUser(binding.emailEditText.text.toString(),
+                binding.passwordEditText.text.toString())
+        }
 
+        observeFlow()
+    }
+
+    private fun observeFlow() {
+        authViewModel.loginFlow.value?.let {resource->
+            when (resource) {
+                is Resource.Failure -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(),resource.exception.toString(),Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    startActivity(Intent(activity, MainActivity::class.java))
+                }
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 
