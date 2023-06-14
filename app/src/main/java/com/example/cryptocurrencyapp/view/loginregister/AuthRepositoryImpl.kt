@@ -26,10 +26,10 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun signUp(name: String, email: String, password: String): Flow<Resource<AuthResult>> = flow {
+    override suspend fun signUp(name: String, email: String, password: String): Flow<Resource<AuthResult>> =flow {
         emit(Resource.Loading)
         val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-        //result.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())?.await()
+        result.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())?.await()
         emit(Resource.Success(result))
 
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/home_recyclerview_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="22dp"
+        android:elevation="11dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/home_recyclerview_crypto_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="sans-serif"
+                android:text="AMZN"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="@+id/home_recyclerview_crypto_name"
+                app:layout_constraintTop_toBottomOf="@+id/home_recyclerview_crypto_name" />
+
+            <TextView
+                android:id="@+id/home_recyclerview_crypto_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Amazon"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                app:layout_constraintStart_toEndOf="@+id/home_recyclerview_crypto_image"
+                app:layout_constraintTop_toTopOf="@+id/home_recyclerview_crypto_image" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/home_recyclerview_crypto_image"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="14dp"
+                app:shapeAppearanceOverlay="@style/Home.ImageView.Round"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/constraint_layout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/home_recyclerview_crypto_current_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:text="$3,260,48"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/home_recyclerview_crypto_name" />
+
+            <TextView
+                android:id="@+id/home_recyclerview_crypto_24hr_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="0,71%"
+                android:textColor="#4CAF50"
+                app:layout_constraintEnd_toEndOf="@+id/home_recyclerview_crypto_current_price"
+                app:layout_constraintTop_toBottomOf="@+id/home_recyclerview_crypto_current_price" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
