@@ -32,13 +32,32 @@
             android:layout_height="match_parent">
 
 
+            <EditText
+                android:id="@+id/emailEditTextRegister2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableStart="@drawable/icon_lock"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/app_theme"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameEditTextRegister" />
 
             <EditText
                 android:id="@+id/passwordEditTextRegister"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableStart="@drawable/icon_lock"
@@ -49,23 +68,23 @@
                 android:inputType="textPersonName"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailEditTextRegister" />
+                app:layout_constraintTop_toBottomOf="@+id/emailEditTextRegister2" />
 
             <EditText
-                android:id="@+id/emailEditTextRegister"
+                android:id="@+id/nameEditTextRegister"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/edit_text_background"
-                android:drawableLeft="@drawable/icon_email"
+                android:drawableLeft="@drawable/icon_person"
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/app_theme"
                 android:ems="10"
-                android:hint="Email"
+                android:hint="Name"
                 android:inputType="textPersonName"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
