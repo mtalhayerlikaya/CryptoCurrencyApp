@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.databinding.FragmentHomeBinding
@@ -58,7 +60,10 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         binding.progressBarHome.visibility = View.GONE
-                        val adapter = CryptoAdapter(requireContext(), result.result)
+                        val adapter = CryptoAdapter(requireContext(), result.result){
+                            val action = HomeFragmentDirections.actionHomeFragment2ToDetailFragment()
+                            binding.root.findNavController().navigate(action)
+                        }
                         binding.homeRV.adapter = adapter
                         binding.homeRV.layoutManager =
                             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

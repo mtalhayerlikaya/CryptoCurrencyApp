@@ -9,7 +9,8 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.databinding.HomeRecyclerviewItemBinding
 
-class CryptoAdapter(val context: Context, private val cryptoList: List<CryptoModel>) :
+class CryptoAdapter(val context: Context, private val cryptoList: List<CryptoModel>,
+                    private val cryptoRowListener: (cryptoModel:CryptoModel) -> Unit) :
     RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
     inner class CryptoViewHolder(var binding: HomeRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(cryptoModel: CryptoModel) {
@@ -40,11 +41,18 @@ class CryptoAdapter(val context: Context, private val cryptoList: List<CryptoMod
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
         val cryptoModel: CryptoModel = cryptoList[position]
         holder.bind(cryptoModel)
+        holder.binding.homeRecyclerviewItemRoot.setOnClickListener {
+            cryptoRowListener.invoke(cryptoModel)
+        }
     }
 
     override fun getItemCount(): Int {
         return cryptoList.size
     }
+
+   /* interface CryptoRowListener{
+        fun cryptoClickListener(cryptoModel: CryptoModel)
+    }*/
 
 
 
