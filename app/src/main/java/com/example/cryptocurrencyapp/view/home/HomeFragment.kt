@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.databinding.FragmentHomeBinding
@@ -54,17 +55,17 @@ class HomeFragment : Fragment() {
             homeViewModel.allCryptos.collect() {result->
                 when (result) {
                     is Resource.Failure -> {
-                       // binding.progressBar.visibility = View.GONE
+                        binding.progressBarHome.visibility = View.GONE
                         Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
                     }
                     is Resource.Loading -> {
-                        //binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBarHome.visibility = View.VISIBLE
                     }
                     is Resource.Success -> {
-                        //binding.progressBar.visibility = View.GONE
-                        result.result.forEach {
-                            println(it)
-                        }
+                        binding.progressBarHome.visibility = View.GONE
+                        val adapter = CryptoAdapter(requireContext(),result.result)
+                        binding.homeRV.adapter= adapter
+                        binding.homeRV.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
                     }
                 }
             }

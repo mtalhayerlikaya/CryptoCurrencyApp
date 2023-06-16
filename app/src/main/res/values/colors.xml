@@ -12,4 +12,6 @@
     <color name="app_theme_light">#f6fbff</color>
     <color name="edit_text_border">#03A9F4</color>
     <color name="edit_text_background">#f6fbff</color>
+    <color name="edittext_gain_percentage_color">#4CAF50</color>
+    <color name="edittext_lost_percentage_color">#FF1100</color>
 </resources>
