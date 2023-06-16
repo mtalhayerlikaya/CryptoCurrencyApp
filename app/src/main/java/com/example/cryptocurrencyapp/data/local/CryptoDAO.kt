@@ -10,8 +10,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CryptoDAO {
-    @Query("SELECT * FROM crypto")
+    /*@Query("SELECT * FROM crypto")
     suspend fun getAllCryptosFromDB(): List<CryptoEntity>
+
+    @Query("SELECT * FROM crypto WHERE cryptoID = :id")
+    suspend fun getCryptoByID(cryptoID: String): CryptoEntity*/
 
     @Query("DELETE FROM crypto")
     suspend fun deleteAllRowsFromDB()

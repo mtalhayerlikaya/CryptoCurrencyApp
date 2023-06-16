@@ -28,5 +28,9 @@
         android:id="@+id/detailFragment"
         android:name="com.example.cryptocurrencyapp.view.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="cryptoID"
+            app:argType="string" />
+    </fragment>
 </navigation>

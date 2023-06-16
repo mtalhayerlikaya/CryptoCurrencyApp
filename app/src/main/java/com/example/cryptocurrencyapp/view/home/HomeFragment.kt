@@ -42,11 +42,6 @@ class HomeFragment : Fragment() {
         observeFlow()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun observeFlow() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             homeViewModel.allCryptos.collect() { result ->
@@ -60,8 +55,8 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         binding.progressBarHome.visibility = View.GONE
-                        val adapter = CryptoAdapter(requireContext(), result.result){
-                            val action = HomeFragmentDirections.actionHomeFragment2ToDetailFragment()
+                        val adapter = CryptoAdapter(requireContext(), result.result){crypto->
+                            val action = HomeFragmentDirections.actionHomeFragment2ToDetailFragment(crypto.cryptoId)
                             binding.root.findNavController().navigate(action)
                         }
                         binding.homeRV.adapter = adapter
@@ -71,6 +66,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
