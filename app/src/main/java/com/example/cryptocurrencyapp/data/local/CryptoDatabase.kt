@@ -6,5 +6,5 @@ import com.example.cryptocurrencyapp.data.model.CryptoEntity
 
 @Database(entities = [CryptoEntity::class], version = 1)
 abstract class CryptoDatabase : RoomDatabase() {
-    abstract fun userDao(): CryptoDAO
+    abstract fun cryptoDao(): CryptoDAO
 }

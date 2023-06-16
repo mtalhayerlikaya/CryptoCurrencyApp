@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyapp.di
 
+import com.example.cryptocurrencyapp.data.local.LocalCryptoData
 import com.example.cryptocurrencyapp.data.remote.CryptoAPI
 import com.example.cryptocurrencyapp.data.remote.RemoteCryptoData
 import com.example.cryptocurrencyapp.data.remote.RemoteCryptoDataImpl
@@ -32,6 +33,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesCryptoRepository(remoteCryptoData: RemoteCryptoData): CryptoRepository = CryptoRepositoryImpl(remoteCryptoData)
+    fun providesCryptoRepository(remoteCryptoData: RemoteCryptoData,
+                                 localCryptoData: LocalCryptoData): CryptoRepository = CryptoRepositoryImpl(remoteCryptoData,localCryptoData)
 
 }
