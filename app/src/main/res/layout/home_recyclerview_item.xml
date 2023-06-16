@@ -52,8 +52,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/home_recyclerview_crypto_image"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginStart="14dp"
                 app:shapeAppearanceOverlay="@style/Home.ImageView.Round"
                 app:layout_constraintBottom_toBottomOf="parent"
