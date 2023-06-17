@@ -6,6 +6,9 @@ import com.example.cryptocurrencyapp.data.model.CryptoModel
 import kotlinx.coroutines.flow.Flow
 
 interface CryptoRepository {
-    fun getAllCryptos() : Flow<Resource<List<CryptoModel>>>
-    fun getCryptoByID(cryptoId:String) : Flow<Resource<CryptoDetailResponse>>
+    fun getAllCryptos(): Flow<Resource<List<CryptoModel>>>
+
+    fun getCryptoByID(cryptoId: String): Flow<Resource<CryptoDetailResponse>>
+
+    fun getCryptosCurrentPriceByID(delay: Long, cryptoId: String): Flow<Resource<Double>>
 }

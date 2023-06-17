@@ -1,6 +1,6 @@
 package com.example.cryptocurrencyapp.data.model
 
-import com.example.cryptocurrencyapp.data.EntityMapper
+import com.example.cryptocurrencyapp.data.mapper.EntityMapper
 
 class CryptoDBEntityMapper : EntityMapper<CryptoModel, CryptoEntity> {
     override fun mapToEntity(cryptoModel: CryptoModel): CryptoEntity {

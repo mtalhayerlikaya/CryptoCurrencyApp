@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_detail_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,6 +18,46 @@
         app:layout_constraintStart_toEndOf="@+id/fragment_detail_root"
         app:layout_constraintStart_toStartOf="@+id/fragment_detail_root"
         app:layout_constraintTop_toTopOf="@+id/fragment_detail_root" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/intervalTimeCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="200dp"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dropDownHeight="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/detailCurrentPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="price:"
+        app:layout_constraintEnd_toEndOf="@+id/intervalTimeCardView"
+        app:layout_constraintTop_toBottomOf="@+id/intervalTimeCardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

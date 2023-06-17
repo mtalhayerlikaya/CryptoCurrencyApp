@@ -13,6 +13,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -34,6 +35,7 @@ object AppModule {
     @Provides
     @Singleton
     fun providesCryptoRepository(remoteCryptoData: RemoteCryptoData,
-                                 localCryptoData: LocalCryptoData): CryptoRepository = CryptoRepositoryImpl(remoteCryptoData,localCryptoData)
+                                 localCryptoData: LocalCryptoData,
+                                 dispatcher: CoroutineDispatcher): CryptoRepository = CryptoRepositoryImpl(remoteCryptoData,localCryptoData,dispatcher)
 
 }

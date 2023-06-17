@@ -10,16 +10,15 @@ data class CryptoDetailResponse(
     @SerializedName("name")
     val name:String,
     @SerializedName("image")
-    val image:String,
-    @SerializedName("current_price")
-    val current_price:Long,
+    val image:Image,
+    @SerializedName("market_data")
+    val market_data: MarketData,
     @SerializedName("price_change_24h")
     val price_change_24h:Long,
     @SerializedName("price_change_percentage_24h")
     val price_change_percentage_24h:Double,
     @SerializedName("description")
-    val description:String,
+    val description:Description,
     @SerializedName("hashing_algorithm")
-    val hashing_algorithm:String,
-
-)
+    val hashing_algorithm:String
+    )
