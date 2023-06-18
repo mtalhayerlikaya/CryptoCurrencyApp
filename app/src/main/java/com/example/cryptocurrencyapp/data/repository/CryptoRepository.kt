@@ -11,4 +11,5 @@ interface CryptoRepository {
     fun getCryptoByID(cryptoId: String): Flow<Resource<CryptoDetailResponse>>
 
     fun getCryptosCurrentPriceByID(delay: Long, cryptoId: String): Flow<Resource<Double>>
+    fun logout()
 }

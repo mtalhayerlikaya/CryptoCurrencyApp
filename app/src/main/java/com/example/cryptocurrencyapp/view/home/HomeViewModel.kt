@@ -19,8 +19,7 @@ class HomeViewModel
     private val _allCryptos = MutableSharedFlow<Resource<List<CryptoModel>>>()
     val allCryptos: SharedFlow<Resource<List<CryptoModel>>> = _allCryptos
 
-    private val _detailCrypto = MutableSharedFlow<Resource<CryptoDetailResponse>>()
-    val detailCrypto: SharedFlow<Resource<CryptoDetailResponse>> = _detailCrypto
+
 
 
     fun getCryptos() = viewModelScope.launch {
@@ -28,12 +27,7 @@ class HomeViewModel
             _allCryptos.emit(it)
         }
     }
-
-    fun getCryptoByID(cryptoID: String) = viewModelScope.launch {
-        cryptoRepository.getCryptoByID(cryptoID).collect() {
-            _detailCrypto.emit(it)
-        }
+    fun logout(){
+        cryptoRepository.logout()
     }
-
-
 }

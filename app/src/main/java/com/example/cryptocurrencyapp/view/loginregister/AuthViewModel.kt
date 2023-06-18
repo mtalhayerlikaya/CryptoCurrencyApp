@@ -5,6 +5,7 @@ import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.data.repository.AuthRepository
 import com.example.cryptocurrencyapp.utils.LoginResult
 import com.example.cryptocurrencyapp.utils.SignUpResult
 import com.google.firebase.auth.AuthResult
@@ -75,10 +76,6 @@ constructor(private val repository: AuthRepository) : ViewModel() {
             return true
         }
         return false
-    }
-
-    fun logout() {
-        repository.logout()
     }
 
 }

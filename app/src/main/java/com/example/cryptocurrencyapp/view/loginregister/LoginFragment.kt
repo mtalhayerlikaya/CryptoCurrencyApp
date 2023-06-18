@@ -66,6 +66,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun observeFlow() {
+
+        authViewModel.currentUser?.let {
+            startActivity(Intent(activity, MainActivity::class.java))
+        }
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             authViewModel.loginFlow.collect() { state ->
                 when (state) {
@@ -79,10 +84,10 @@ class LoginFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         startActivity(Intent(activity, MainActivity::class.java))
+                        requireActivity().finish()
                     }
                 }
             }
-
         }
     }
 

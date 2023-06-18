@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.view.loginregister
+package com.example.cryptocurrencyapp.data.repository
 
 import com.example.cryptocurrencyapp.Resource
 import com.google.firebase.auth.AuthResult
@@ -38,8 +38,5 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
 
-    override fun logout() {
-        firebaseAuth.signOut()
-    }
 
 }

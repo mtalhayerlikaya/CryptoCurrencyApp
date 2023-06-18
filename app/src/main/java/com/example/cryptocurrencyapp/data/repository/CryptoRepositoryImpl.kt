@@ -7,6 +7,7 @@ import com.example.cryptocurrencyapp.data.model.CryptoDBEntityMapper
 import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
 import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.data.remote.RemoteCryptoData
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class CryptoRepositoryImpl
 @Inject
 constructor(
+    private val firebaseAuth: FirebaseAuth,
     private val remoteCryptoData: RemoteCryptoData,
     private val localCryptoData: LocalCryptoData,
     private val dispatcher: CoroutineDispatcher
@@ -59,5 +61,10 @@ constructor(
             }
         }.flowOn(dispatcher)
     }
+
+    override fun logout() {
+        firebaseAuth.signOut()
+    }
+
 
 }

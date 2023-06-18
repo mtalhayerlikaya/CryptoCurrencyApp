@@ -33,4 +33,5 @@ class DetailViewModel
             _detailCurrentPrice.emit(it)
         }
     }
+
 }

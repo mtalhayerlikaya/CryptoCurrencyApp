@@ -6,8 +6,8 @@ import com.example.cryptocurrencyapp.data.remote.RemoteCryptoData
 import com.example.cryptocurrencyapp.data.remote.RemoteCryptoDataImpl
 import com.example.cryptocurrencyapp.data.repository.CryptoRepository
 import com.example.cryptocurrencyapp.data.repository.CryptoRepositoryImpl
-import com.example.cryptocurrencyapp.view.loginregister.AuthRepository
-import com.example.cryptocurrencyapp.view.loginregister.AuthRepositoryImpl
+import com.example.cryptocurrencyapp.data.repository.AuthRepository
+import com.example.cryptocurrencyapp.data.repository.AuthRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -34,8 +34,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesCryptoRepository(remoteCryptoData: RemoteCryptoData,
+    fun providesCryptoRepository(
+                                 firebaseAuth: FirebaseAuth,
+                                 remoteCryptoData: RemoteCryptoData,
                                  localCryptoData: LocalCryptoData,
-                                 dispatcher: CoroutineDispatcher): CryptoRepository = CryptoRepositoryImpl(remoteCryptoData,localCryptoData,dispatcher)
+                                 dispatcher: CoroutineDispatcher): CryptoRepository = CryptoRepositoryImpl(firebaseAuth,remoteCryptoData,localCryptoData,dispatcher)
 
 }

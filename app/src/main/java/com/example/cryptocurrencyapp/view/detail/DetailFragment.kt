@@ -1,5 +1,8 @@
 package com.example.cryptocurrencyapp.view.detail
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,14 +11,18 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
 import com.example.cryptocurrencyapp.databinding.FragmentDetailBinding
+import com.example.cryptocurrencyapp.view.loginregister.LoginRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,6 +65,9 @@ class DetailFragment : Fragment() {
         binding.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
             detailViewModel.getCryptosCurrentPriceByID(itemsMsList[position], cryptoId)
         }
+        binding.favoriteCardView.setOnClickListener {
+
+        }
     }
 
     private fun onBackPressed() {
@@ -81,7 +91,7 @@ class DetailFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         binding.progressBarDetail.visibility = View.GONE
-                        Log.e("detail", result.result.toString())
+                        setUI(result.result)
                     }
                 }
             }
@@ -92,11 +102,26 @@ class DetailFragment : Fragment() {
                     is Resource.Failure -> {}
                     is Resource.Loading -> {}
                     is Resource.Success -> {
-                        binding.detailCurrentPrice.text = result.result.toString()
+                        binding.detailCryptoPrice.text = result.result.toString()
                     }
                 }
             }
         }
+    }
+
+    private fun setUI(response: CryptoDetailResponse){
+        binding.detailCryptoName.text = response.name
+        binding.detailCryptoSymbol.text = response.symbol.uppercase()
+        binding.detailCryptoPrice.text = response.market_data.currentPrice.usd.toString()
+        binding.cryptoDetailPriceIncrease.text = response.market_data.price_change_24h.toString()
+        binding.cryptoDetailPricePercentageIncrease.text = response.market_data.price_change_percentage_24h.toString()
+        binding.detailCryptoHashingName.text = if(response.hashing_algorithm.isNullOrEmpty()) "Empty" else response.hashing_algorithm
+        binding.detailCryptoDescription.text = response.description.en
+
+        Glide.with(requireContext())
+            .load(response.image.large)
+            .into(binding.detailCryptoImage)
+
     }
 
     override fun onDestroyView() {
