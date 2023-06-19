@@ -21,14 +21,14 @@
             <ProgressBar
                 android:id="@+id/progressBarDetail"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <com.google.android.material.card.MaterialCardView
@@ -149,7 +149,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="17dp"
+                    android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/backCardView"
                     app:layout_constraintEnd_toStartOf="@+id/favoriteCardView"
                     app:layout_constraintStart_toEndOf="@+id/backCardView"
@@ -164,6 +164,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:textAlignment="center"
                     android:textColor="#303343"
+                    android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/detailCryptoName"
                     app:layout_constraintStart_toEndOf="@+id/detailCryptoName"
                     app:layout_constraintTop_toTopOf="@+id/detailCryptoName"
@@ -172,13 +173,14 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/detailCryptoImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="65dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginTop="64dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameAndSymbolLinearLayout"
-                app:shapeAppearanceOverlay="@style/Home.ImageView.Detail.Round"
+                app:shapeAppearanceOverlay="@style/Home.ImageView.Round"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
@@ -253,7 +255,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:padding="5dp"
+                    android:padding="11dp"
                     android:text="SHA-256"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
@@ -287,7 +289,7 @@
                     android:id="@+id/detailCryptoDescription"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:padding="11dp"
                     android:text="@string/description_detail"
                     android:textColor="@color/white" />
             </androidx.cardview.widget.CardView>

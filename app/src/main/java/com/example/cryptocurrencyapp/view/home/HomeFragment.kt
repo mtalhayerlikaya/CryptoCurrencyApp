@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         binding.progressBarHome.visibility = View.GONE
-                        val adapter = CryptoAdapter(requireContext(), result.result){crypto->
+                        val adapter = CryptoAdapter(requireContext(), result.result.toMutableList()){crypto->
                             val action = HomeFragmentDirections.actionHomeFragment2ToDetailFragment(crypto.cryptoId)
                             binding.root.findNavController().navigate(action)
                         }

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
 import com.example.cryptocurrencyapp.data.repository.CryptoRepository
+import com.google.android.gms.tasks.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -21,6 +22,9 @@ class DetailViewModel
     private val _detailCurrentPrice = MutableSharedFlow<Resource<Double>>()
     val detailCurrentPrice: SharedFlow<Resource<Double>> = _detailCurrentPrice
 
+    private val _firebaseFav = MutableSharedFlow<Resource<Task<Void>>>()
+    val firebaseFav: SharedFlow<Resource<Task<Void>>> = _firebaseFav
+
 
     fun getCryptoDetail(cryptoID: String) = viewModelScope.launch {
         cryptoRepository.getCryptoByID(cryptoID).collect() {
@@ -31,6 +35,12 @@ class DetailViewModel
     fun getCryptosCurrentPriceByID(delay: Long, cryptoID: String) = viewModelScope.launch {
         cryptoRepository.getCryptosCurrentPriceByID(delay, cryptoID).collect() {
             _detailCurrentPrice.emit(it)
+        }
+    }
+
+    fun addCryptoToFavorities(cryptoDetailResponse: CryptoDetailResponse) = viewModelScope.launch {
+        cryptoRepository.addCryptoToFavorites(cryptoDetailResponse).collect() {
+            _firebaseFav.emit(it)
         }
     }
 

@@ -3,22 +3,21 @@ package com.example.cryptocurrencyapp.data.repository
 import android.util.Log
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.data.local.LocalCryptoData
-import com.example.cryptocurrencyapp.data.model.CryptoDBEntityMapper
-import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
-import com.example.cryptocurrencyapp.data.model.CryptoModel
+import com.example.cryptocurrencyapp.data.model.*
 import com.example.cryptocurrencyapp.data.remote.RemoteCryptoData
+import com.example.cryptocurrencyapp.utils.Constants.FIREBASE_FAVOURITES
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class CryptoRepositoryImpl
 @Inject
 constructor(
+    private val firestore: FirebaseFirestore,
     private val firebaseAuth: FirebaseAuth,
     private val remoteCryptoData: RemoteCryptoData,
     private val localCryptoData: LocalCryptoData,
@@ -61,6 +60,67 @@ constructor(
             }
         }.flowOn(dispatcher)
     }
+
+    override fun addCryptoToFavorites(cryptoDetailResponse: CryptoDetailResponse) = flow {
+
+        emit(Resource.Loading)
+
+        val currentUser = firebaseAuth.currentUser
+        currentUser?.let { user ->
+            val firestoreFav = firestore.collection(FIREBASE_FAVOURITES).document(user.uid)
+                .collection("cryptos")
+                .document(CryptoDetailToCryptoMapper().mapToCryptoModel(cryptoDetailResponse).name)
+                .set(CryptoDetailToCryptoMapper().mapToCryptoModel(cryptoDetailResponse))
+
+            firestoreFav.await()
+
+            emit(Resource.Success(firestoreFav))
+        }
+
+
+    }.catch {
+        emit(Resource.Failure(it.message ?: it.localizedMessage))
+    }
+
+    override fun getAllFavoritesFromFireStore() = flow {
+
+        emit(Resource.Loading)
+
+        val currentUser = firebaseAuth.currentUser
+        currentUser?.let { user ->
+            val snapshot = firestore.collection(FIREBASE_FAVOURITES).document(user.uid)
+                .collection("cryptos").get()
+                .await()
+
+            val data = snapshot.toObjects(FavoriteModel::class.java)
+
+            emit(Resource.Success(data))
+        }
+
+
+    }.catch {
+        emit(Resource.Failure(it.message ?: it.localizedMessage))
+    }
+
+    override fun deleteFromFavorites(cryptoModel: FavoriteModel) = flow {
+
+        emit(Resource.Loading)
+
+        val currentUser = firebaseAuth.currentUser
+        currentUser?.let { user ->
+            val firestoreFav = firestore.collection(FIREBASE_FAVOURITES).document(user.uid)
+                .collection("cryptos").document(cryptoModel.name).delete()
+
+            firestoreFav.await()
+
+
+            emit(Resource.Success(firestoreFav))
+        }
+
+    }.catch {
+        emit(Resource.Failure(it.message ?: it.localizedMessage))
+    }
+
 
     override fun logout() {
         firebaseAuth.signOut()

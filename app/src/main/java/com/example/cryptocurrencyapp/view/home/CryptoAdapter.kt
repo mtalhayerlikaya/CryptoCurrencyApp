@@ -9,22 +9,24 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.databinding.HomeRecyclerviewItemBinding
 
-class CryptoAdapter(val context: Context, private val cryptoList: List<CryptoModel>,
-                    private val cryptoRowListener: (cryptoModel:CryptoModel) -> Unit) :
+class CryptoAdapter(
+    val context: Context, private val cryptoList: MutableList<CryptoModel>,
+    private val cryptoRowListener: (cryptoModel: CryptoModel) -> Unit
+) :
     RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
     inner class CryptoViewHolder(var binding: HomeRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(cryptoModel: CryptoModel) {
             binding.homeRecyclerviewCryptoName.text = cryptoModel.name
             binding.homeRecyclerviewCryptoSymbol.text = cryptoModel.symbol.uppercase()
             binding.homeRecyclerviewCrypto24hrPercentage.text = context.resources
-                .getString(R.string.crypto_price_with_percentage,cryptoModel.price_change_percentage_24h,"%")
+                .getString(R.string.crypto_price_with_percentage, cryptoModel.price_change_percentage_24h, "%")
             binding.homeRecyclerviewCryptoCurrentPrice.text = cryptoModel.current_price
-            if(!cryptoModel.price_change_percentage_24h.startsWith("-")){
+            if (!cryptoModel.price_change_percentage_24h.startsWith("-")) {
                 binding.homeRecyclerviewCrypto24hrPercentage
-                    .setTextColor(context.resources.getColor(R.color.edittext_gain_percentage_color,context.theme))
-            }else{
+                    .setTextColor(context.resources.getColor(R.color.edittext_gain_percentage_color, context.theme))
+            } else {
                 binding.homeRecyclerviewCrypto24hrPercentage
-                    .setTextColor(context.resources.getColor(R.color.edittext_lost_percentage_color,context.theme))
+                    .setTextColor(context.resources.getColor(R.color.edittext_lost_percentage_color, context.theme))
             }
             Glide.with(context)
                 .load(cryptoModel.image)
@@ -50,10 +52,13 @@ class CryptoAdapter(val context: Context, private val cryptoList: List<CryptoMod
         return cryptoList.size
     }
 
-   /* interface CryptoRowListener{
-        fun cryptoClickListener(cryptoModel: CryptoModel)
-    }*/
+    fun removeItem(position: Int) {
+        cryptoList.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
-
+    fun getCrypto(position: Int): CryptoModel {
+        return cryptoList[position]
+    }
 
 }

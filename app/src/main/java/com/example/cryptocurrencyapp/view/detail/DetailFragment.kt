@@ -1,17 +1,12 @@
 package com.example.cryptocurrencyapp.view.detail
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +17,6 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
 import com.example.cryptocurrencyapp.databinding.FragmentDetailBinding
-import com.example.cryptocurrencyapp.view.loginregister.LoginRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +25,8 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val detailViewModel by viewModels<DetailViewModel>()
     private lateinit var cryptoId: String
+    private var cryptoDetailResponse: CryptoDetailResponse? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,7 +62,9 @@ class DetailFragment : Fragment() {
             detailViewModel.getCryptosCurrentPriceByID(itemsMsList[position], cryptoId)
         }
         binding.favoriteCardView.setOnClickListener {
-
+            cryptoDetailResponse?.let {detailModel->
+                detailViewModel.addCryptoToFavorities(detailModel)
+            }
         }
     }
 
@@ -107,15 +105,31 @@ class DetailFragment : Fragment() {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            detailViewModel.firebaseFav.collect() { result ->
+                when (result) {
+                    is Resource.Failure -> {
+                        Toast.makeText(requireContext(),result.exceptionMessage, Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        Toast.makeText(requireContext(),"Added Fav Succesfully", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
-    private fun setUI(response: CryptoDetailResponse){
+    private fun setUI(response: CryptoDetailResponse) {
+        cryptoDetailResponse = response
         binding.detailCryptoName.text = response.name
         binding.detailCryptoSymbol.text = response.symbol.uppercase()
         binding.detailCryptoPrice.text = response.market_data.currentPrice.usd.toString()
         binding.cryptoDetailPriceIncrease.text = response.market_data.price_change_24h.toString()
         binding.cryptoDetailPricePercentageIncrease.text = response.market_data.price_change_percentage_24h.toString()
-        binding.detailCryptoHashingName.text = if(response.hashing_algorithm.isNullOrEmpty()) "Empty" else response.hashing_algorithm
+        binding.detailCryptoHashingName.text =
+            if (response.hashing_algorithm.isNullOrEmpty()) "Empty" else response.hashing_algorithm
         binding.detailCryptoDescription.text = response.description.en
 
         Glide.with(requireContext())
