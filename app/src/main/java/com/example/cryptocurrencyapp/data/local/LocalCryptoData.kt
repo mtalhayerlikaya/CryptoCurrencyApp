@@ -4,4 +4,5 @@ import com.example.cryptocurrencyapp.data.model.CryptoEntity
 
 interface LocalCryptoData {
     suspend fun insertCryptoList(cryptoList:List<CryptoEntity>)
+    suspend fun getSearchedCryptoFromDB(searchPattern: String):List<CryptoEntity>
 }

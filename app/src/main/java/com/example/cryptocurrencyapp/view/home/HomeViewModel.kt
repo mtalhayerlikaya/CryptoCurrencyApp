@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
+import com.example.cryptocurrencyapp.data.model.CryptoEntity
 import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.data.repository.CryptoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,15 +20,26 @@ class HomeViewModel
     private val _allCryptos = MutableSharedFlow<Resource<List<CryptoModel>>>()
     val allCryptos: SharedFlow<Resource<List<CryptoModel>>> = _allCryptos
 
-
-
+    private val _searchCryptoFlow= MutableSharedFlow<Resource<List<CryptoModel>>>()
+    val searchCryptoFlow: SharedFlow<Resource<List<CryptoModel>>> = _searchCryptoFlow
 
     fun getCryptos() = viewModelScope.launch {
         cryptoRepository.getAllCryptos().collect() {
             _allCryptos.emit(it)
         }
     }
+
+    fun searchCrypto(searchPattern:String)=viewModelScope.launch{
+        cryptoRepository.getSearchedCryptoFromDB(searchPattern).collect() {
+            _searchCryptoFlow.emit(it)
+        }
+    }
+
+
     fun logout(){
         cryptoRepository.logout()
     }
+
+
+
 }

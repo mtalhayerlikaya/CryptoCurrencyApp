@@ -10,7 +10,7 @@ import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.databinding.HomeRecyclerviewItemBinding
 
 class CryptoAdapter(
-    val context: Context, private val cryptoList: MutableList<CryptoModel>,
+    val context: Context, private var cryptoList: MutableList<CryptoModel>,
     private val cryptoRowListener: (cryptoModel: CryptoModel) -> Unit
 ) :
     RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
@@ -50,6 +50,12 @@ class CryptoAdapter(
 
     override fun getItemCount(): Int {
         return cryptoList.size
+    }
+
+    fun updateList(newList:MutableList<CryptoModel>){
+        cryptoList.clear()
+        cryptoList = newList
+        notifyDataSetChanged()
     }
 
     fun removeItem(position: Int) {

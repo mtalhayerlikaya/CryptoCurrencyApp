@@ -2,6 +2,7 @@ package com.example.cryptocurrencyapp.data.repository
 
 import com.example.cryptocurrencyapp.Resource
 import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
+import com.example.cryptocurrencyapp.data.model.CryptoEntity
 import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.data.model.FavoriteModel
 import com.google.android.gms.tasks.Task
@@ -16,5 +17,6 @@ interface CryptoRepository {
     fun addCryptoToFavorites(cryptoDetailResponse: CryptoDetailResponse): Flow<Resource<Task<Void>>>
     fun getAllFavoritesFromFireStore(): Flow<Resource<List<FavoriteModel>>>
     fun deleteFromFavorites(cryptoModel: FavoriteModel): Flow<Resource<Task<Void>>>
+    fun getSearchedCryptoFromDB(searchPattern:String): Flow<Resource<List<CryptoModel>>>
     fun logout()
 }

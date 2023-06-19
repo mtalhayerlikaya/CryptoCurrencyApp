@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val homeViewModel by viewModels<HomeViewModel>()
-
+    private lateinit var adapter:CryptoAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,7 +48,21 @@ class HomeFragment : Fragment() {
         homeViewModel.getCryptos()
         observeFlow()
         logoutDialog()
+        searchCrypto()
     }
+
+    private fun searchCrypto(){
+        binding.homeSearchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                p0?.let { query->
+                    homeViewModel.searchCrypto(query)
+                }
+                return true
+            }
+            override fun onQueryTextChange(p0: String?): Boolean {return true}
+        })
+    }
+
     private fun logoutDialog() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             AlertDialog.Builder(context)
@@ -64,6 +79,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+
     private fun observeFlow() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             homeViewModel.allCryptos.collect() { result ->
@@ -77,7 +93,7 @@ class HomeFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         binding.progressBarHome.visibility = View.GONE
-                        val adapter = CryptoAdapter(requireContext(), result.result.toMutableList()){crypto->
+                         adapter = CryptoAdapter(requireContext(), result.result.toMutableList()){crypto->
                             val action = HomeFragmentDirections.actionHomeFragment2ToDetailFragment(crypto.cryptoId)
                             binding.root.findNavController().navigate(action)
                         }
@@ -88,7 +104,26 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            homeViewModel.searchCryptoFlow.collect() { result ->
+                when (result) {
+                    is Resource.Failure -> {
+                        binding.progressBarHome.visibility = View.GONE
+                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
+                    }
+                    is Resource.Loading -> {
+                        binding.progressBarHome.visibility = View.VISIBLE
+                    }
+                    is Resource.Success -> {
+                        binding.progressBarHome.visibility = View.GONE
+                        adapter.updateList(result.result.toMutableList())
+                    }
+                }
+            }
+        }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

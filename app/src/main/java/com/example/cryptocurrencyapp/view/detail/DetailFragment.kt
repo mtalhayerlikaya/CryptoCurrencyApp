@@ -71,7 +71,7 @@ class DetailFragment : Fragment() {
     private fun onBackPressed() {
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                Navigation.findNavController(binding.fragmentDetailRoot).popBackStack()
+                Navigation.findNavController(binding.backCardView).popBackStack()
             }
         })
     }

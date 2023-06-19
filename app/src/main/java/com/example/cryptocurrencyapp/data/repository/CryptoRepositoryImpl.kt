@@ -121,6 +121,15 @@ constructor(
         emit(Resource.Failure(it.message ?: it.localizedMessage))
     }
 
+    override fun getSearchedCryptoFromDB(searchPattern: String) = flow {
+        emit(Resource.Loading)
+        try {
+            val result = localCryptoData.getSearchedCryptoFromDB(searchPattern)
+            emit(Resource.Success(CryptoDBEntityMapper().toCryptoList(result)))
+        } catch (throwable: Throwable) {
+            emit(Resource.Failure(throwable.message ?: throwable.localizedMessage))
+        }
+    }
 
     override fun logout() {
         firebaseAuth.signOut()

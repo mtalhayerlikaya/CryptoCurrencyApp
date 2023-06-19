@@ -1,300 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_detail_root"
+    android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:layout_height="wrap_content"
     android:background="@color/purple_700"
     tools:context=".view.detail.DetailFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ProgressBar
-                android:id="@+id/progressBarDetail"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ProgressBar
+            android:id="@+id/progressBarDetail"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/intervalTimeCardView"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/intervalTimeCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceAndPercentageIncreaseLy">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="7dp"
-                app:cardElevation="6dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/priceAndPercentageIncreaseLy">
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:dropDownHeight="wrap_content"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/detailTimeInterval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Time Interval"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/intervalTimeCardView"
+            app:layout_constraintStart_toStartOf="@+id/intervalTimeCardView"
+            app:layout_constraintTop_toBottomOf="@+id/intervalTimeCardView" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/backCardView"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/icon_back"
+            android:backgroundTint="#1A1D2C"
+            app:cardCornerRadius="19dp"
+            app:cardElevation="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/backgroundBackIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-                    <AutoCompleteTextView
-                        android:id="@+id/autoCompleteTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:dropDownHeight="wrap_content"
-                        android:inputType="none" />
-                </com.google.android.material.textfield.TextInputLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/favoriteCardView"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/icon_back"
+            android:backgroundTint="#1A1D2C"
+            app:cardCornerRadius="19dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            </com.google.android.material.card.MaterialCardView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/backgroundFavIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_favorite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/nameAndSymbolLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/backCardView"
+            app:layout_constraintEnd_toStartOf="@+id/favoriteCardView"
+            app:layout_constraintStart_toEndOf="@+id/backCardView"
+            app:layout_constraintTop_toTopOf="@+id/backCardView">
 
             <TextView
-                android:id="@+id/detailTimeInterval"
+                android:id="@+id/detailCryptoName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Time Interval"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/intervalTimeCardView"
-                app:layout_constraintStart_toStartOf="@+id/intervalTimeCardView"
-                app:layout_constraintTop_toBottomOf="@+id/intervalTimeCardView" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/backCardView"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/icon_back"
-                android:backgroundTint="#1A1D2C"
-                app:cardCornerRadius="19dp"
-                app:cardElevation="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/backgroundBackIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/icon_back"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/favoriteCardView"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/icon_back"
-                android:backgroundTint="#1A1D2C"
-                app:cardCornerRadius="19dp"
-                app:cardElevation="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/backgroundFavIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/icon_favorite"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/nameAndSymbolLinearLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:fontFamily="sans-serif-medium"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/backCardView"
                 app:layout_constraintEnd_toStartOf="@+id/favoriteCardView"
                 app:layout_constraintStart_toEndOf="@+id/backCardView"
-                app:layout_constraintTop_toTopOf="@+id/backCardView">
-
-                <TextView
-                    android:id="@+id/detailCryptoName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:textAlignment="center"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/backCardView"
-                    app:layout_constraintEnd_toStartOf="@+id/favoriteCardView"
-                    app:layout_constraintStart_toEndOf="@+id/backCardView"
-                    app:layout_constraintTop_toTopOf="@+id/backCardView"
-                    tools:text="Amazon" />
-
-                <TextView
-                    android:id="@+id/detailCryptoSymbol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:textAlignment="center"
-                    android:textColor="#303343"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/detailCryptoName"
-                    app:layout_constraintStart_toEndOf="@+id/detailCryptoName"
-                    app:layout_constraintTop_toTopOf="@+id/detailCryptoName"
-                    tools:text="(AMZN)" />
-            </LinearLayout>
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/detailCryptoImage"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_marginTop="64dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameAndSymbolLinearLayout"
-                app:shapeAppearanceOverlay="@style/Home.ImageView.Round"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="@+id/backCardView"
+                tools:text="Amazon" />
 
             <TextView
-                android:id="@+id/detailCryptoPrice"
+                android:id="@+id/detailCryptoSymbol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginStart="5dp"
                 android:fontFamily="sans-serif-medium"
-                tools:text="$3,380.57"
-                android:textColor="#FFFFFF"
-                android:textSize="45dp"
-                app:layout_constraintEnd_toEndOf="@+id/detailCryptoImage"
-                app:layout_constraintStart_toStartOf="@+id/detailCryptoImage"
-                app:layout_constraintTop_toBottomOf="@+id/detailCryptoImage" />
-            <LinearLayout
-                android:id="@+id/priceAndPercentageIncreaseLy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:textAlignment="center"
+                android:textColor="#303343"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailCryptoName"
+                app:layout_constraintStart_toEndOf="@+id/detailCryptoName"
+                app:layout_constraintTop_toTopOf="@+id/detailCryptoName"
+                tools:text="(AMZN)" />
+        </LinearLayout>
 
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/detailCryptoPrice"
-                app:layout_constraintStart_toStartOf="@+id/detailCryptoPrice"
-                app:layout_constraintTop_toBottomOf="@+id/detailCryptoPrice"
-                >
-                <TextView
-                    android:id="@+id/cryptoDetailPriceIncrease"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="+ $52.37"
-                    android:textColor="@color/edittext_gain_percentage_color"
-                    android:paddingEnd="5dp"
-                    />
-                <TextView
-                    android:id="@+id/cryptoDetailPricePercentageIncrease"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="(1.15%)"
-                    android:textColor="@color/edittext_gain_percentage_color"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/detailCryptoImage"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="64dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameAndSymbolLinearLayout"
+            app:shapeAppearanceOverlay="@style/Home.ImageView.Round"
+            tools:src="@tools:sample/avatars" />
 
-                    />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/detailCryptoPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFFFFF"
+            android:textSize="45dp"
+            app:layout_constraintEnd_toEndOf="@+id/detailCryptoImage"
+            app:layout_constraintStart_toStartOf="@+id/detailCryptoImage"
+            app:layout_constraintTop_toBottomOf="@+id/detailCryptoImage"
+            tools:text="$3,380.57" />
 
+        <LinearLayout
+            android:id="@+id/priceAndPercentageIncreaseLy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:text="Hashing Algorithm"
-                android:textColor="#FFFFFF"
-                android:textSize="17dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/priceAndPercentageIncreaseLy"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="417dp" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailCryptoHashingCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="#1A1D2C"
-                android:elevation="9dp"
-                app:cardCornerRadius="19dp"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10">
-
-                <TextView
-                    android:id="@+id/detailCryptoHashingName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:padding="11dp"
-                    android:text="SHA-256"
-                    android:textAlignment="center"
-                    android:textColor="@color/white" />
-            </androidx.cardview.widget.CardView>
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/detailCryptoPrice"
+            app:layout_constraintStart_toStartOf="@+id/detailCryptoPrice"
+            app:layout_constraintTop_toBottomOf="@+id/detailCryptoPrice">
 
             <TextView
-                android:id="@+id/descriptionHeader"
+                android:id="@+id/cryptoDetailPriceIncrease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Description"
-                android:textColor="#FFFFFF"
-                android:textSize="17dp"
-                app:layout_constraintStart_toStartOf="@+id/detailCryptoHashingCardView"
-                app:layout_constraintTop_toBottomOf="@+id/detailCryptoHashingCardView" />
+                android:paddingEnd="5dp"
+                android:textColor="@color/edittext_gain_percentage_color"
+                tools:text="+ $52.37" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailCryptoDescriptionCardView"
+            <TextView
+                android:id="@+id/cryptoDetailPricePercentageIncrease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/edittext_gain_percentage_color"
+                tools:text="(1.15%)"
+
+                />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Hashing Algorithm"
+            android:textColor="#FFFFFF"
+            android:textSize="17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceAndPercentageIncreaseLy"
+            tools:layout_editor_absoluteX="66dp"
+            tools:layout_editor_absoluteY="417dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/detailCryptoHashingCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#1A1D2C"
+            android:elevation="9dp"
+            app:cardCornerRadius="19dp"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+            <TextView
+                android:id="@+id/detailCryptoHashingName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="11dp"
+                android:text="SHA-256"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/descriptionHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Description"
+            android:textColor="#FFFFFF"
+            android:textSize="17dp"
+            app:layout_constraintStart_toStartOf="@+id/detailCryptoHashingCardView"
+            app:layout_constraintTop_toBottomOf="@+id/detailCryptoHashingCardView" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/detailCryptoDescriptionCardView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#1A1D2C"
+            android:elevation="9dp"
+            app:cardCornerRadius="19dp"
+            app:layout_constraintStart_toStartOf="@+id/descriptionHeader"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionHeader">
+
+            <TextView
+                android:id="@+id/detailCryptoDescription"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
-                android:backgroundTint="#1A1D2C"
-                android:elevation="9dp"
-                app:cardCornerRadius="19dp"
-                app:layout_constraintStart_toStartOf="@+id/descriptionHeader"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionHeader">
-
-                <TextView
-                    android:id="@+id/detailCryptoDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="11dp"
-                    android:text="@string/description_detail"
-                    android:textColor="@color/white" />
-            </androidx.cardview.widget.CardView>
+                android:layout_height="match_parent"
+                android:padding="11dp"
+                android:text="@string/description_detail"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+

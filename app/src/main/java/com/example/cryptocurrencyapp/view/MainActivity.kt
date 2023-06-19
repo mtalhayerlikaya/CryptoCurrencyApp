@@ -9,6 +9,7 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -21,16 +22,13 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navHostFragment.navController)
-        setnavHostDestinateionChangedListener(navHostFragment)
-    }
 
-    private fun setnavHostDestinateionChangedListener(navHostFragment: NavHostFragment) {
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.detailFragment) {
-                binding.bottomNavigationView.visibility = View.GONE
-            } else {
-                binding.bottomNavigationView.visibility = View.VISIBLE
+            when(destination.id){
+                R.id.detailFragment -> binding.bottomNavigationView.visibility = View.GONE
+                else -> binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }
     }
+
 }
