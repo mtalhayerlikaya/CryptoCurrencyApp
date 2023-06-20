@@ -66,6 +66,9 @@ class DetailFragment : Fragment() {
                 detailViewModel.addCryptoToFavorities(detailModel)
             }
         }
+        binding.backCardView.setOnClickListener {
+            Navigation.findNavController(binding.backCardView).popBackStack()
+        }
     }
 
     private fun onBackPressed() {
@@ -131,6 +134,22 @@ class DetailFragment : Fragment() {
         binding.detailCryptoHashingName.text =
             if (response.hashing_algorithm.isNullOrEmpty()) "Empty" else response.hashing_algorithm
         binding.detailCryptoDescription.text = response.description.en
+
+        if (!response.market_data.price_change_24h.toString().startsWith("-")) {
+            binding.cryptoDetailPriceIncrease
+                .setTextColor(requireContext().resources.getColor(R.color.edittext_gain_percentage_color, requireContext().theme))
+        } else {
+            binding.cryptoDetailPriceIncrease
+                .setTextColor(requireContext().resources.getColor(R.color.edittext_lost_percentage_color, requireContext().theme))
+        }
+
+        if (!response.market_data.price_change_percentage_24h.toString().startsWith("-")) {
+            binding.cryptoDetailPricePercentageIncrease
+                .setTextColor(requireContext().resources.getColor(R.color.edittext_gain_percentage_color, requireContext().theme))
+        } else {
+            binding.cryptoDetailPricePercentageIncrease
+                .setTextColor(requireContext().resources.getColor(R.color.edittext_lost_percentage_color, requireContext().theme))
+        }
 
         Glide.with(requireContext())
             .load(response.image.large)

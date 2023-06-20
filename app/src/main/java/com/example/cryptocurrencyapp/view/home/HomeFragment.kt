@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
         observeFlow()
         logoutDialog()
         searchCrypto()
+        logoutButtonSetOnClickListener()
     }
 
     private fun searchCrypto() {
@@ -71,21 +72,28 @@ class HomeFragment : Fragment() {
 
     }
 
-
+    private fun showLogoutDialog(){
+        AlertDialog.Builder(context)
+            .setTitle("Logout")
+            .setMessage("Do you want to logout ?")
+            .setPositiveButton(R.string.yes, DialogInterface.OnClickListener { dialog, which ->
+                homeViewModel.logout()
+                requireActivity().finish()
+                startActivity(Intent(activity, LoginRegisterActivity::class.java))
+            })
+            .setCancelable(false)
+            .setNegativeButton(R.string.no, null)
+            .setIcon(R.drawable.ic_dialog_alert)
+            .show()
+    }
     private fun logoutDialog() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            AlertDialog.Builder(context)
-                .setTitle("Logout")
-                .setMessage("Do you want to logout ?")
-                .setPositiveButton(R.string.yes, DialogInterface.OnClickListener { dialog, which ->
-                    homeViewModel.logout()
-                    requireActivity().finish()
-                    startActivity(Intent(activity, LoginRegisterActivity::class.java))
-                })
-                .setCancelable(false)
-                .setNegativeButton(R.string.no, null)
-                .setIcon(R.drawable.ic_dialog_alert)
-                .show()
+            showLogoutDialog()
+        }
+    }
+    private fun logoutButtonSetOnClickListener(){
+        binding.signOutHome.setOnClickListener {
+            showLogoutDialog()
         }
     }
 

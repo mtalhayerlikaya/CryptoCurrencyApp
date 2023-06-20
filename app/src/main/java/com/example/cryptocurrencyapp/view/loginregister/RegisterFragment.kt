@@ -76,7 +76,7 @@ class RegisterFragment : Fragment() {
                 when (state) {
                     is Resource.Failure -> {
                         binding.progressBarRegister.visibility = View.GONE
-                        Toast.makeText(requireContext(), state.exceptionMessage, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), state.exceptionMessage, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> {
                         binding.progressBarRegister.visibility = View.VISIBLE

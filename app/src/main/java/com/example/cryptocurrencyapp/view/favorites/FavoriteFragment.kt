@@ -12,6 +12,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.data.model.FavoriteModel
 import com.example.cryptocurrencyapp.databinding.FragmentFavoriteBinding
 import com.example.cryptocurrencyapp.view.home.CryptoAdapter
+import com.example.cryptocurrencyapp.view.home.HomeFragmentDirections
 import com.example.cryptocurrencyapp.view.loginregister.LoginRegisterActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,7 +60,7 @@ class FavoriteFragment : Fragment() {
                 when (result) {
                     is Resource.Failure -> {
                         binding.progressBarFavorite.visibility = View.GONE
-                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> {
                         binding.progressBarFavorite.visibility = View.VISIBLE
@@ -75,12 +77,12 @@ class FavoriteFragment : Fragment() {
             favoriteViewModel.deleteCryptoFlow.collect() { result ->
                 when (result) {
                     is Resource.Failure -> {
-                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         Snackbar
-                            .make(binding.favoriteRV, "Item was removed from the list", Snackbar.LENGTH_LONG).show()
+                            .make(binding.favoriteRV, "Item was removed from the list", Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -90,7 +92,10 @@ class FavoriteFragment : Fragment() {
     private fun setAdapter(list: MutableList<FavoriteModel>) {
         if(list.isNullOrEmpty()) binding.favoriteEmtyLayout.visibility = View.VISIBLE
         else binding.favoriteEmtyLayout.visibility = View.GONE
-        val adapter = FavoritesCryptoAdapter(requireContext(), list) {}
+        val adapter = FavoritesCryptoAdapter(requireContext(), list) {
+            val action = FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(it.cryptoId)
+            binding.root.findNavController().navigate(action)
+        }
         binding.favoriteRV.adapter = adapter
         binding.favoriteRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
