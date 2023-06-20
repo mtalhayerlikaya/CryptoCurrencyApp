@@ -26,13 +26,21 @@ constructor(
 
     override fun getAllCryptos(): Flow<Resource<List<CryptoModel>>> = flow {
         emit(Resource.Loading)
-        try {
-            val result = remoteCryptoData.getCryptoListFromAPI()
-            localCryptoData.insertCryptoList(CryptoDBEntityMapper().toEntityList(result))
-            emit(Resource.Success(result))
+
+        val result = try {
+            remoteCryptoData.getCryptoListFromAPI()
         } catch (throwable: Throwable) {
             emit(Resource.Failure(throwable.message ?: throwable.localizedMessage))
+            null
         }
+        if (result.isNullOrEmpty()) {
+            val localResult = localCryptoData.getAllCryptosFromDB()
+            emit(Resource.Success(CryptoDBEntityMapper().toCryptoList(localResult)))
+        }else{
+            localCryptoData.insertCryptoList(CryptoDBEntityMapper().toEntityList(result))
+            emit(Resource.Success(result))
+        }
+
     }
 
     override fun getCryptoByID(cryptoId: String): Flow<Resource<CryptoDetailResponse>> = flow {

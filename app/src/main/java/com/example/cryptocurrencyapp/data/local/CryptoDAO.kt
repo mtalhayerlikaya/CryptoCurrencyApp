@@ -21,6 +21,9 @@ interface CryptoDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllCryptos(cryptos: List<CryptoEntity>)
 
+    @Query("SELECT * FROM crypto")
+    suspend fun getAllCryptos(): List<CryptoEntity>
+
     @Query("SELECT * FROM crypto WHERE name LIKE '%' || :searchPattern || '%' OR symbol LIKE '%' || :searchPattern || '%'")
     suspend fun findCryptoByName(searchPattern: String): List<CryptoEntity>
 

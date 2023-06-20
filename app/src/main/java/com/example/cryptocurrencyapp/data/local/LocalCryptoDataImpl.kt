@@ -14,4 +14,8 @@ constructor(private val cryptoDAO: CryptoDAO):LocalCryptoData {
         return cryptoDAO.findCryptoByName(searchPattern)
     }
 
+    override suspend fun getAllCryptosFromDB(): List<CryptoEntity> {
+        return cryptoDAO.getAllCryptos()
+    }
+
 }

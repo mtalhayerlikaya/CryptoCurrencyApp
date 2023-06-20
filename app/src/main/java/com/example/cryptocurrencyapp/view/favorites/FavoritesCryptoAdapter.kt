@@ -23,7 +23,7 @@ class FavoritesCryptoAdapter(
             binding.favoritesRecyclerviewCryptoSymbol.text = cryptoModel.symbol.uppercase()
             binding.favoritesRecyclerviewCrypto24hrPercentage.text = context.resources
                 .getString(R.string.crypto_price_with_percentage, cryptoModel.price_change_percentage_24h, "%")
-            binding.favoritesRecyclerviewCryptoCurrentPrice.text = cryptoModel.current_price
+            binding.favoritesRecyclerviewCryptoCurrentPrice.text = context.resources.getString(R.string.crypto_price, cryptoModel.current_price, "$")
             if (!cryptoModel.price_change_percentage_24h.startsWith("-")) {
                 binding.favoritesRecyclerviewCrypto24hrPercentage
                     .setTextColor(context.resources.getColor(R.color.edittext_gain_percentage_color, context.theme))

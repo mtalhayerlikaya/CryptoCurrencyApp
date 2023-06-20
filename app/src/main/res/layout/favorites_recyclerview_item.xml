@@ -12,6 +12,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/favorites_recyclerview_cardview"
         android:layout_width="match_parent"
+        android:backgroundTint="#1A1D2C"
         android:layout_height="100dp"
         app:cardCornerRadius="22dp"
         android:layout_marginTop="7dp"
@@ -35,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:fontFamily="sans-serif"
+                android:textColor="@color/white"
                 android:text="AMZN"
                 android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="@+id/favorites_recyclerview_crypto_name"
@@ -48,7 +50,7 @@
                 android:layout_marginTop="18dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Amazon"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/favorites_recyclerview_crypto_image"
                 app:layout_constraintTop_toTopOf="@+id/favorites_recyclerview_crypto_image" />
@@ -71,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="14dp"
                 android:text="$3,260,48"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/favorites_recyclerview_crypto_name" />

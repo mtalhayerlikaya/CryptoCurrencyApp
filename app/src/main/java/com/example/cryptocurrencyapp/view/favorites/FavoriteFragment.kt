@@ -57,14 +57,14 @@ class FavoriteFragment : Fragment() {
             favoriteViewModel.firebaseAllFavCryptosFlow.collect() { result ->
                 when (result) {
                     is Resource.Failure -> {
-                        binding.progressBarFavorites.visibility = View.GONE
+                        binding.progressBarFavorite.visibility = View.GONE
                         Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
                     }
                     is Resource.Loading -> {
-                        binding.progressBarFavorites.visibility = View.VISIBLE
+                        binding.progressBarFavorite.visibility = View.VISIBLE
                     }
                     is Resource.Success -> {
-                        binding.progressBarFavorites.visibility = View.GONE
+                        binding.progressBarFavorite.visibility = View.GONE
                         setAdapter(result.result.toMutableList())
                     }
                 }
@@ -88,6 +88,8 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setAdapter(list: MutableList<FavoriteModel>) {
+        if(list.isNullOrEmpty()) binding.favoriteEmtyLayout.visibility = View.VISIBLE
+        else binding.favoriteEmtyLayout.visibility = View.GONE
         val adapter = FavoritesCryptoAdapter(requireContext(), list) {}
         binding.favoriteRV.adapter = adapter
         binding.favoriteRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

@@ -82,7 +82,7 @@ class DetailFragment : Fragment() {
                 when (result) {
                     is Resource.Failure -> {
                         binding.progressBarDetail.visibility = View.GONE
-                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> {
                         binding.progressBarDetail.visibility = View.VISIBLE
@@ -110,11 +110,11 @@ class DetailFragment : Fragment() {
             detailViewModel.firebaseFav.collect() { result ->
                 when (result) {
                     is Resource.Failure -> {
-                        Toast.makeText(requireContext(),result.exceptionMessage, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(),result.exceptionMessage, Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
-                        Toast.makeText(requireContext(),"Added Fav Succesfully", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(),"Added Fav Succesfully", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -125,9 +125,9 @@ class DetailFragment : Fragment() {
         cryptoDetailResponse = response
         binding.detailCryptoName.text = response.name
         binding.detailCryptoSymbol.text = response.symbol.uppercase()
-        binding.detailCryptoPrice.text = response.market_data.currentPrice.usd.toString()
-        binding.cryptoDetailPriceIncrease.text = response.market_data.price_change_24h.toString()
-        binding.cryptoDetailPricePercentageIncrease.text = response.market_data.price_change_percentage_24h.toString()
+        binding.detailCryptoPrice.text = resources.getString(R.string.crypto_price, response.market_data.currentPrice.usd.toString(), "$")
+        binding.cryptoDetailPriceIncrease.text = resources.getString(R.string.crypto_price_increase, response.market_data.price_change_24h.toString(), "$")
+        binding.cryptoDetailPricePercentageIncrease.text = resources.getString(R.string.crypto_price_and_percentage_increase, response.market_data.price_change_percentage_24h.toString(), "%")
         binding.detailCryptoHashingName.text =
             if (response.hashing_algorithm.isNullOrEmpty()) "Empty" else response.hashing_algorithm
         binding.detailCryptoDescription.text = response.description.en
