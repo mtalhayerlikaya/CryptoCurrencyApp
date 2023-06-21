@@ -5,4 +5,11 @@
 <img src="https://github.com/mtalhayerlikaya/CryptoCurrencyApp/assets/60544250/addf6718-0da7-4429-bee4-088d12bac74d.jpg" width="225" height="500"/>|
 <img src="https://github.com/mtalhayerlikaya/CryptoCurrencyApp/assets/60544250/b69b2e3d-80a8-4a5d-9774-3d92f362594c.jpg" width="225" height="500"/>|
 
+## Used Tech
+* Coroutines/Flow
+* Hilt
+* Glide
+* Retrofit
+* Firebase
+
 
