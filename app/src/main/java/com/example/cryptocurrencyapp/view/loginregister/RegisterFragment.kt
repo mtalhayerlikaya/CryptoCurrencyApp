@@ -84,6 +84,7 @@ class RegisterFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBarRegister.visibility = View.GONE
                         startActivity(Intent(activity, MainActivity::class.java))
+                        requireActivity().finish()
                     }
                 }
             }

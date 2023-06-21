@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_register_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -28,17 +28,5 @@
         app:popUpTo="@id/loginFragment"
         app:popUpToInclusive="true"
         />
-    </fragment>
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.cryptocurrencyapp.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/action_loginFragment_to_registerFragment"
-            />
     </fragment>
 </navigation>

@@ -14,25 +14,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoCurrencyApp"
         tools:targetApi="31">
-
         <activity
-            android:name=".view.loginregister.LoginRegisterActivity"
+            android:name=".splash.SplashActivity"
             android:exported="true"
             android:label="@string/title_activity_login_register"
             android:theme="@style/Theme.CryptoCurrencyApp.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
         </activity>
 
         <activity
+            android:name=".view.loginregister.LoginRegisterActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login_register"
+            android:theme="@style/Theme.CryptoCurrencyApp.NoActionBar" />
+        <activity
             android:name=".view.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.CryptoCurrencyApp.NoActionBar">
-        </activity>
-
+            android:theme="@style/Theme.CryptoCurrencyApp.NoActionBar" />
     </application>
 
 </manifest>

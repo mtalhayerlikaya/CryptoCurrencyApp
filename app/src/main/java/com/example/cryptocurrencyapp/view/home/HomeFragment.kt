@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
             .setMessage("Do you want to logout ?")
             .setPositiveButton(R.string.yes, DialogInterface.OnClickListener { dialog, which ->
                 homeViewModel.logout()
-                //requireActivity().finish()
+                requireActivity().finish()
                 startActivity(Intent(activity, LoginRegisterActivity::class.java))
             })
             .setCancelable(false)

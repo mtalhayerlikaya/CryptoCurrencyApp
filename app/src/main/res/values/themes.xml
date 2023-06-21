@@ -37,6 +37,7 @@
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
+
     <style name="ImageView.Round" parent="">
         <item name="cornerSize">35%</item>
     </style>
