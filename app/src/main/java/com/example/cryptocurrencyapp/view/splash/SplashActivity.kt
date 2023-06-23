@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.splash
+package com.example.cryptocurrencyapp.view.splash
 
 import android.content.Intent
 import android.os.Bundle
