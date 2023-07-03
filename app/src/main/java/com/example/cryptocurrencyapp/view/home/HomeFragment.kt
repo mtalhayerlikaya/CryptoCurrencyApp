@@ -140,6 +140,18 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            homeViewModel.loggedInUser.collect() { result ->
+                when (result) {
+                    is Resource.Failure -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        binding.userName.text = result.result.email
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

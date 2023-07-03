@@ -1,11 +1,11 @@
 package com.example.cryptocurrencyapp.data.repository
 
 import android.util.Log
-import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.local.LocalCryptoData
 import com.example.cryptocurrencyapp.data.model.*
 import com.example.cryptocurrencyapp.data.remote.RemoteCryptoData
 import com.example.cryptocurrencyapp.utils.Constants.FIREBASE_FAVOURITES
+import com.example.cryptocurrencyapp.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineDispatcher
@@ -36,7 +36,7 @@ constructor(
         if (result.isNullOrEmpty()) {
             val localResult = localCryptoData.getAllCryptosFromDB()
             emit(Resource.Success(CryptoDBEntityMapper().toCryptoList(localResult)))
-        }else{
+        } else {
             localCryptoData.insertCryptoList(CryptoDBEntityMapper().toEntityList(result))
             emit(Resource.Success(result))
         }
@@ -51,6 +51,15 @@ constructor(
         } catch (throwable: Throwable) {
             emit(Resource.Failure(throwable.message ?: throwable.localizedMessage))
         }
+    }
+
+    override fun getCurrentUserFromFirabase() = flow {
+        emit(Resource.Loading)
+        firebaseAuth.currentUser?.let {
+            emit(Resource.Success(it))
+        }
+    }.catch {
+        emit(Resource.Failure(it.message ?: it.localizedMessage))
     }
 
     override fun getCryptosCurrentPriceByID(delay: Long, cryptoId: String): Flow<Resource<Double>> {

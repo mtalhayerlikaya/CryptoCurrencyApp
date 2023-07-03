@@ -116,6 +116,7 @@ class FavoriteFragment : Fragment() {
                 .setPositiveButton(android.R.string.yes) { _, _ ->
                     favoriteViewModel.logout()
                     startActivity(Intent(activity, LoginRegisterActivity::class.java))
+                    requireActivity().finish()
                 }
                 .setCancelable(false)
                 .setNegativeButton(android.R.string.no, null)
