@@ -2,7 +2,7 @@ package com.example.cryptocurrencyapp.view.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
 import com.example.cryptocurrencyapp.data.repository.CryptoRepository
 import com.google.android.gms.tasks.Task

@@ -15,7 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.databinding.FragmentHomeBinding
 import com.example.cryptocurrencyapp.view.loginregister.LoginRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,7 +1,6 @@
 package com.example.cryptocurrencyapp.view.favorites
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,12 +15,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cryptocurrencyapp.Resource
-import com.example.cryptocurrencyapp.data.model.CryptoModel
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.model.FavoriteModel
 import com.example.cryptocurrencyapp.databinding.FragmentFavoriteBinding
-import com.example.cryptocurrencyapp.view.home.CryptoAdapter
-import com.example.cryptocurrencyapp.view.home.HomeFragmentDirections
 import com.example.cryptocurrencyapp.view.loginregister.LoginRegisterActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -104,6 +100,8 @@ class FavoriteFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 favoriteViewModel.deleteCryptoFromFavorites(adapter.getCrypto(position))
                 adapter.removeItem(position)
+                if(list.isNullOrEmpty()) binding.favoriteEmtyLayout.visibility = View.VISIBLE
+                else binding.favoriteEmtyLayout.visibility = View.GONE
             }
         }
         val itemTouchhelper = ItemTouchHelper(swipeToDeleteCallback)

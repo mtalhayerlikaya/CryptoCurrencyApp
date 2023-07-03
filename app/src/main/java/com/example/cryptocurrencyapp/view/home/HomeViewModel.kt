@@ -2,9 +2,7 @@ package com.example.cryptocurrencyapp.view.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencyapp.Resource
-import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
-import com.example.cryptocurrencyapp.data.model.CryptoEntity
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.model.CryptoModel
 import com.example.cryptocurrencyapp.data.repository.CryptoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

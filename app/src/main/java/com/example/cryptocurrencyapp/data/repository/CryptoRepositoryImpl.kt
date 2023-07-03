@@ -1,7 +1,7 @@
 package com.example.cryptocurrencyapp.data.repository
 
 import android.util.Log
-import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.local.LocalCryptoData
 import com.example.cryptocurrencyapp.data.model.*
 import com.example.cryptocurrencyapp.data.remote.RemoteCryptoData

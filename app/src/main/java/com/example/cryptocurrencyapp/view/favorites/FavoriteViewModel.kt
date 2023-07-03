@@ -2,8 +2,7 @@ package com.example.cryptocurrencyapp.view.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencyapp.Resource
-import com.example.cryptocurrencyapp.data.model.CryptoModel
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.model.FavoriteModel
 import com.example.cryptocurrencyapp.data.repository.CryptoRepository
 import com.google.android.gms.tasks.Task

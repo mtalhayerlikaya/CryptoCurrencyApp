@@ -4,7 +4,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.repository.AuthRepository
 import com.example.cryptocurrencyapp.utils.LoginResult
 import com.example.cryptocurrencyapp.utils.SignUpResult

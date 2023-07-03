@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "422326886635",
+    "project_id": "notdefteri-fb540",
+    "storage_bucket": "notdefteri-fb540.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422326886635:android:ee187c2215513643b45eae",
+        "android_client_info": {
+          "package_name": "com.example.cryptocurrencyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422326886635-kjrm3e91pnm4c6cmfj1cuji234j2nb29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNZUNYo-87QS__lmeF_90oqSav5A316RQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422326886635-kjrm3e91pnm4c6cmfj1cuji234j2nb29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422326886635:android:209b963601954e39b45eae",
+        "android_client_info": {
+          "package_name": "com.example.notdefteri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422326886635-84gl5p9e7cjb2djois6lm4jiendqhgbg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notdefteri",
+            "certificate_hash": "804d4793df91fa31e568e61f1ee69986d1e300d6"
+          }
+        },
+        {
+          "client_id": "422326886635-kjrm3e91pnm4c6cmfj1cuji234j2nb29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNZUNYo-87QS__lmeF_90oqSav5A316RQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422326886635-kjrm3e91pnm4c6cmfj1cuji234j2nb29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

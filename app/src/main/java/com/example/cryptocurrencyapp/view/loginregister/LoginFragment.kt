@@ -9,17 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.whenCreated
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.databinding.FragmentLoginBinding
 import com.example.cryptocurrencyapp.utils.LoginResult
 
 import com.example.cryptocurrencyapp.view.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {

@@ -14,7 +14,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.Resource
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.data.model.CryptoDetailResponse
 import com.example.cryptocurrencyapp.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint

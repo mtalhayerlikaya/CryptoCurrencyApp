@@ -11,9 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.Resource
-import com.example.cryptocurrencyapp.databinding.FragmentLoginBinding
+import com.example.cryptocurrencyapp.utils.Resource
 import com.example.cryptocurrencyapp.databinding.FragmentRegisterBinding
 import com.example.cryptocurrencyapp.utils.SignUpResult
 import com.example.cryptocurrencyapp.view.MainActivity
